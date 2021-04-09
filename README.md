@@ -21,6 +21,7 @@ in your project's root directory
 npx degit anyass3/dmt-installer#main dmt
 node dmt/setup.cjs
 ```
+then edit dmt/settings.json before installing the app
 
 now to install the dmt-app
 
