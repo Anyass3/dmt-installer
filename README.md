@@ -8,7 +8,7 @@
 ### in the settings.json
 
 - app_base: change app_base value to your app_base-route - the frontend sub-route in which the app should run.
-- manifest: if you have one in static change it the name to yours
+- manifest: if you have one in static change its value to yours
 - app_html: your main html entry before build
 - build: your app build directory
 - hook: if you have a dmt hook change it to its directory
@@ -27,4 +27,5 @@ now to install the dmt-app
 ```bash
 npm run dmt-install
 ```
+
 # dmt-installer

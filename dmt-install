@@ -1,0 +1,56 @@
+#!/bin/bash
+
+SOURCE="$(cd "$(dirname "$1")"; pwd)/$(basename "$1")"
+
+cd $SOURCE
+
+# before build scripts
+node dmt/editBase.cjs
+node dmt/editAppHtml.cjs
+
+# build
+npm run build
+
+# after build scripts
+if [ -f dmt/editManifest.cjs ]; then node dmt/editManifest.cjs; fi
+node dmt/resetAppHtml.cjs
+node dmt/resetBase.cjs
+
+
+# variables
+app_base="$(node dmt/variables/app_base.cjs)"
+build="$(node dmt/variables/build.cjs)"
+hook="$(node dmt/variables/hook.cjs)"
+
+source ~/.dmt/etc/.bash_aliases_bundle # dirsync
+
+
+# dmt apps dir
+DMT_APPS="$HOME/.dmt/apps"
+
+# DMT-APPS sync
+SOURCE_HOOK="${SOURCE}${hook}"
+SOURCE_PUBLIC="${SOURCE}${build}"
+
+
+# sync backend
+if [ -d $SOURCE_HOOK ]; then
+mkdir -p "$DMT_APPS/${app_base}/backend"; cd $_
+dirsync "$SOURCE_HOOK" .
+dmt restart
+fi
+
+# sync frontend
+if [ -d $SOURCE_PUBLIC ]; then
+mkdir -p "$DMT_APPS/$app_base/public"; cd $_
+dirsync "$SOURCE_PUBLIC" .
+fi
+
+
+printf "${GREEN}✓ Updated ~/.dmt/apps${NC}\n"
+
+cd $SOURCE
+
+# # if we wanted to sync the changes to server then uncomment below and change USERNAME & SERVER_IP
+# echo 'rsync server'
+# rsync -azP "$DMT_APPS/$app_base" "USERNAME@SERVER_IP:/home/USERNAME/.dmt/apps/$app_base"
