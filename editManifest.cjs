@@ -1,3 +1,4 @@
+const colors = require('colors');
 const fs = require('fs');
 
 let settings = fs.readFileSync('dmt/settings.json', 'utf-8');
@@ -20,9 +21,9 @@ if (fs.existsSync(manifestPath)) {
     []
   );
 
-  manifest.start_url = `/${app_base}`;
-  manifest.scope = '/'; //`/${app_base}`;
+  manifest.start_url = `/${app_base}/`;
+  manifest.scope = `/${app_base}/`;
 
   fs.writeFileSync(manifestPath, JSON.stringify(manifest));
-  console.log(`edited manifest to also match /${app_base}/`);
+  console.log(colors.magenta(`edited manifest to also match /${app_base}/`));
 }
