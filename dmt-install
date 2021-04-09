@@ -11,10 +11,14 @@ hook="$(node dmt/variables/hook.cjs)"
 
 
 
+source ~/.dmt/etc/.bash_aliases_bundle # dirsync
+
 # sync frontend
 if [ $app_base = my-app-base ]; then
 
-echo 'please open setting.json and change app_base to yours'
+printf "${RED}Please open setting.json and change app_base to yours! "
+echo ''
+echo 'Not Successful'
 
 else
     # before build scripts
@@ -30,7 +34,6 @@ else
     node dmt/resetBase.cjs
 
 
-    source ~/.dmt/etc/.bash_aliases_bundle # dirsync
 
 
     # dmt apps dir
