@@ -18,7 +18,7 @@
 in your project's root directory
 
 ```bash
-npx degit anyass3/dmt-installer#main dmt
+npx degit anyass3/dmt-installer#svite dmt
 node dmt/setup.cjs
 ```
 
