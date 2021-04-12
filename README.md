@@ -1,6 +1,6 @@
 # DMT-Standalone-APP-Installer for svelte-kit
 
-> should work with vinilla svelte vite-apps but for rollup some minor changes will do.
+> for [svelte+vite(svite)](https://github.com/Anyass3/dmt-installer/tree/svite)
 
 > Now with vite we don't neccesarily need hash-based-routing.
 > any type of routing will work
@@ -21,6 +21,7 @@ in your project's root directory
 npx degit anyass3/dmt-installer#main dmt
 node dmt/setup.cjs
 ```
+
 then edit dmt/settings.json before installing the app
 
 now to install the dmt-app
