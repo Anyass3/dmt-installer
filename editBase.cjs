@@ -8,17 +8,26 @@ const app_base = settings.app_base;
 // change this to your app base name
 // ie. the frontend sub-route in which the app should run.
 
-const toAddConfig = `
-	kit: {
-		paths: {
-			assets: '/${app_base}',
-			base: '/${app_base}'
-		},`;
+const canEditRe = `paths\\:[\\ ]{[\\t\\n\\ ]*assets:[\\ ]*\\'${app_base}\\'\\,[\\t\\n\\ ]*base:[\\ ]*\\'${app_base}\\'[\\t\\n\\ ]*\\}[\\ ]*\\,`;
 
-if (fs.existsSync(svelteConfig)) {
-  svelteConfigFile = fs.readFileSync(svelteConfig, 'utf8');
-  svelteConfigFile = svelteConfigFile.replace(/kit:[\ ]*{/, toAddConfig);
-  fs.writeFileSync(svelteConfig, svelteConfigFile);
-
-  console.log(`Add base ^/${app_base}.*`);
+function edit(filePath, re, toAdd) {
+  if (fs.existsSync(filePath)) {
+    let fileStr = fs.readFileSync(filePath, 'utf8');
+    canEdit = !RegExp(canEditRe).test(fileStr);
+    if (canEdit) {
+      fileStr = fileStr.replace(re, toAdd);
+      fs.writeFileSync(filePath, fileStr);
+      console.log(`Add base ^/${app_base}.*`);
+    }
+  }
 }
+
+edit(
+  svelteConfig,
+  /kit:[\ ]*{/,
+  `kit: {
+		paths: {
+			assets: '${app_base}',
+			base: '${app_base}'
+		},`
+);
