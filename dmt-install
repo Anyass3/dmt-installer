@@ -41,7 +41,7 @@ else
 
     # DMT-APPS sync
     SOURCE_HOOK="${SOURCE}${hook}"
-    SOURCE_PUBLIC="${SOURCEyoutube-dl/public}${build}"
+    SOURCE_PUBLIC="${SOURCE}${build}"
 
 
     # sync backend
