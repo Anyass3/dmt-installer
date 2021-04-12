@@ -1,4 +1,3 @@
-const colors = require('colors');
 const fs = require('fs');
 
 let settings = fs.readFileSync('dmt/settings.json', 'utf-8');

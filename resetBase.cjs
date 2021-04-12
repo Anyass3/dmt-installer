@@ -1,5 +1,3 @@
-const svelteConfig = 'svelte.config.cjs';
-
 const fs = require('fs');
 
 let settings = fs.readFileSync('dmt/settings.json', 'utf-8');
@@ -7,12 +5,17 @@ settings = JSON.parse(settings);
 
 const app_base = settings.app_base;
 
-const AddedConfig = `[\\t\\n\\ ]*paths\\:[\\ ]{[\\t\\n\\ ]*assets:[\\ ]*\\'${app_base}\\'\\,[\\t\\n\\ ]*base:[\\ ]*\\'${app_base}\\'[\\t\\n\\ ]*\\}[\\ ]*\\,[\\t\\n\\ ]*`;
+const re = `[\\t\\n\\ ]*base:[\\ ]*'${app_base}'[\\ ]*,[\\t\\n\\ ]*`;
 
-if (fs.existsSync(svelteConfig)) {
-  svelteConfigFile = fs.readFileSync(svelteConfig, 'utf8');
-  svelteConfigFile = svelteConfigFile.replace(RegExp(AddedConfig), `\n\t`);
-  fs.writeFileSync(svelteConfig, svelteConfigFile);
+function reset(filePath, re, value) {
+  if (fs.existsSync(filePath)) {
+    let fileStr = fs.readFileSync(filePath, 'utf8');
+    fileStr = fileStr.replace(RegExp(re), value);
+    fs.writeFileSync(filePath, fileStr);
 
-  console.log(`restored svelte.config.cjs`);
+    console.log(`restored base ^/${app_base}.*`);
+  }
 }
+
+reset('vite.config.js', re, `\n\t`);
+reset('vite.config.cjs', re, `\n\t`);

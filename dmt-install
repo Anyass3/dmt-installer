@@ -23,14 +23,12 @@ echo 'Not Successful'
 else
     # before build scripts
     node dmt/editBase.cjs
-    node dmt/editAppHtml.cjs
 
     # build
     npm run build
 
     # after build scripts
     if [ -f dmt/editManifest.cjs ]; then node dmt/editManifest.cjs; fi
-    node dmt/resetAppHtml.cjs
     node dmt/resetBase.cjs
 
 
