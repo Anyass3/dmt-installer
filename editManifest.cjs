@@ -24,5 +24,5 @@ if (fs.existsSync(manifestPath)) {
   manifest.scope = `/${app_base}/`;
 
   fs.writeFileSync(manifestPath, JSON.stringify(manifest));
-  console.log(colors.magenta(`edited manifest to also match /${app_base}/`));
+  console.log(`edited manifest to also match /${app_base}/`);
 }
