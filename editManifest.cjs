@@ -11,7 +11,7 @@ const manifestPath = `build/${manifestFileName}`;
 
 // if it doesn't exist nothing will happend
 
-if (fs.existsSync(manifestPath)) {
+if (manifestFileName && fs.existsSync(manifestPath)) {
   let manifest = fs.readFileSync(manifestPath, 'utf-8');
   manifest = JSON.parse(manifest);
 
