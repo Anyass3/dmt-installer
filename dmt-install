@@ -44,14 +44,14 @@ else
 
     # sync backend
     if [ -d $SOURCE_HOOK ]; then
-    mkdir -p "$DMT_APPS/${app_base}/backend"; cd $_
+    mkdir -p "$DMT_APPS/${app_base}"; cd $_
     dirsync "$SOURCE_HOOK" .
     dmt restart
     fi
 
     # sync frontend
     if [ -d $SOURCE_PUBLIC ]; then
-    mkdir -p "$DMT_APPS/$app_base/public"; cd $_
+    mkdir -p "$DMT_APPS/$app_base/gui"; cd $_
     dirsync "$SOURCE_PUBLIC" .
     fi
 
