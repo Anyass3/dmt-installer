@@ -1,3 +1,4 @@
+Project moved to [https://github.com/dmtsys/dmt-integrate]
 # DMT-Standalone-APP-Installer for svelte-kit
 
 > for [svelte+vite(svite)](https://github.com/Anyass3/dmt-installer/tree/svite)
